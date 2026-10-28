@@ -31,17 +31,15 @@ export default function AppleIcon() {
           strokeOpacity="0.55"
           strokeWidth="1.2"
         />
+        <path d="M32 52 C14 39 11 28 11 22 C11 14.5 16.5 10 23 10 C27 10 30 12.2 32 16 C34 12.2 37 10 41 10 C47.5 10 53 14.5 53 22 C53 28 50 39 32 52 Z" fill="url(#gold)" />
         <path
-          d="M15 55 V30 C15 20 27 17 32 7 C37 17 49 20 49 30 V55 Z"
-          fill="#24130b"
-          stroke="url(#gold)"
-          strokeWidth="3"
-          strokeLinejoin="round"
+          d="M20 21 C20 17.5 22.5 16 25 16"
+          fill="none"
+          stroke="#fff6d6"
+          strokeOpacity="0.55"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
-        <g transform="translate(19.5 24) scale(0.56)" fill="url(#gold)">
-          <path d="M31 6a18 18 0 1 0 0 36 14.5 14.5 0 0 1 0-36Z" />
-          <path d="m37 17 1.6 3.9 4.2.3-3.2 2.7 1 4.1-3.6-2.2-3.6 2.2 1-4.1-3.2-2.7 4.2-.3Z" />
-        </g>
       </svg>
     ),
     size,
