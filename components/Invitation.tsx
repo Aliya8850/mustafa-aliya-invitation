@@ -112,50 +112,38 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
 
         <div className="arch hero-anim" style={{ animationDelay: "1s" }}>
           <svg
-            className="arch-bg"
-            viewBox="0 0 100 100"
+            className="arch-cap"
+            viewBox="0 0 100 46"
             preserveAspectRatio="none"
             aria-hidden="true"
             focusable="false"
           >
             <defs>
-              <linearGradient id="archFill" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="capFill" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stopColor="#5a3720" />
-                <stop offset="0.4" stopColor="#34190c" />
-                <stop offset="1" stopColor="#1b0d07" />
+                <stop offset="1" stopColor="#3f2415" />
               </linearGradient>
-              <radialGradient id="archGlow" cx="0.5" cy="0.42" r="0.5">
-                <stop offset="0" stopColor="#f3dfa6" stopOpacity="0.2" />
+              <linearGradient id="capStroke" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor="#f3dfa6" />
+                <stop offset="1" stopColor="#c9a24b" />
+              </linearGradient>
+              <radialGradient id="capGlow" cx="0.5" cy="0.85" r="0.65">
+                <stop offset="0" stopColor="#f3dfa6" stopOpacity="0.22" />
                 <stop offset="1" stopColor="#f3dfa6" stopOpacity="0" />
               </radialGradient>
-              <linearGradient id="archStroke" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#f3dfa6" />
-                <stop offset="0.5" stopColor="#c9a24b" />
-                <stop offset="1" stopColor="#8a6420" />
-              </linearGradient>
             </defs>
-            {/* outermost hairline */}
+            <path d="M0 46 V30 C0 12 36 9 50 0.8 C64 9 100 12 100 30 V46 Z" fill="url(#capFill)" />
+            <path d="M0 46 V30 C0 12 36 9 50 0.8 C64 9 100 12 100 30 V46 Z" fill="url(#capGlow)" />
             <path
-              d="M-2.5 100 V46 C-2.5 20 37.5 13 50 -3 C62.5 13 102.5 20 102.5 46 V100"
+              d="M0 46 V30 C0 12 36 9 50 0.8 C64 9 100 12 100 30 V46"
               fill="none"
-              stroke="#c9a24b"
-              strokeOpacity="0.35"
-              strokeWidth="1"
-              vectorEffect="non-scaling-stroke"
-            />
-            <path
-              d="M1.5 100 V46 C1.5 22 38 16 50 1.5 C62 16 98.5 22 98.5 46 V100 Z"
-              fill="url(#archFill)"
-              stroke="url(#archStroke)"
+              stroke="url(#capStroke)"
               strokeWidth="4"
+              strokeLinejoin="round"
               vectorEffect="non-scaling-stroke"
             />
             <path
-              d="M1.5 100 V46 C1.5 22 38 16 50 1.5 C62 16 98.5 22 98.5 46 V100 Z"
-              fill="url(#archGlow)"
-            />
-            <path
-              d="M5 100 V47 C5 26 39 20 50 6.5 C61 20 95 26 95 47 V100"
+              d="M3 46 V31 C3 15 38 12 50 4.5 C62 12 97 15 97 31 V46"
               fill="none"
               stroke="#c9a24b"
               strokeOpacity="0.6"
@@ -163,8 +151,7 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
               vectorEffect="non-scaling-stroke"
             />
           </svg>
-
-          <Crescent className="arch-finial" />
+          <div className="arch-body" aria-hidden="true" />
 
           <div className="arch-inner">
             <p className="calli bismillah stg" style={{ "--i": 0 } as React.CSSProperties}>
@@ -172,10 +159,10 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
             </p>
 
             <p className="hero-invite stg" style={{ "--i": 1 } as React.CSSProperties}>
-              With great joy &amp; happiness
-              <br />
-              we cordially invite you to celebrate
-              <br />
+              With great joy &amp; happiness{" "}
+              <br className="hidden sm:inline" />
+              we cordially invite you to celebrate{" "}
+              <br className="hidden sm:inline" />
               {v.invite}
             </p>
 

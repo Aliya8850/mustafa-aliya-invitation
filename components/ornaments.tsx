@@ -162,7 +162,7 @@ export function Crescent({ className = "" }: { className?: string }) {
       focusable="false"
     >
       <path
-        d="M31 6a18 18 0 1 0 0 36 14.5 14.5 0 0 1 0-36Z"
+        d="M31 6a18 18 0 1 0 0 36 24 24 0 0 1 0-36Z"
         fill="currentColor"
       />
       <path
