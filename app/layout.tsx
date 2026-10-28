@@ -2,22 +2,23 @@ import type { Metadata, Viewport } from "next";
 import {
   Amiri,
   Aref_Ruqaa,
-  Cinzel_Decorative,
-  Cormorant_Garamond,
-  Pinyon_Script,
+  Cinzel,
+  Great_Vibes,
+  Lora,
 } from "next/font/google";
 import "./globals.css";
 
-const display = Cinzel_Decorative({
+const display = Cinzel({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["400", "600", "700", "900"],
 });
 
-const body = Cormorant_Garamond({
+const body = Lora({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const arabic = Amiri({
@@ -32,7 +33,7 @@ const calligraphy = Aref_Ruqaa({
   weight: ["400", "700"],
 });
 
-const script = Pinyon_Script({
+const script = Great_Vibes({
   variable: "--font-script",
   subsets: ["latin"],
   weight: "400",
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#150a06",
+  themeColor: "#f6fbf4",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

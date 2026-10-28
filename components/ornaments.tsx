@@ -6,25 +6,25 @@ export function Lantern({
   return (
     <div className={`lantern-wrap ${className}`} aria-hidden="true">
     <svg className="lantern" viewBox="0 0 60 130" focusable="false">
-      <line x1="30" y1="0" x2="30" y2="20" stroke="#c9a24b" strokeWidth="1.2" />
-      <circle cx="30" cy="23" r="3.2" fill="#c9a24b" />
-      <path d="M15 46 C15 34 24 30 30 27 C36 30 45 34 45 46 Z" fill="#c9a24b" />
+      <line x1="30" y1="0" x2="30" y2="20" stroke="#5f8c69" strokeWidth="1.2" />
+      <circle cx="30" cy="23" r="3.2" fill="#5f8c69" />
+      <path d="M15 46 C15 34 24 30 30 27 C36 30 45 34 45 46 Z" fill="#6f9b78" />
       <path
         d="M13 46 H47 L43 96 H17 Z"
-        fill="rgba(201,162,75,0.12)"
-        stroke="#c9a24b"
+        fill="rgba(95,140,105,0.12)"
+        stroke="#5f8c69"
         strokeWidth="1.4"
       />
       <path
         className="lantern-glow"
         d="M22 90 V62 Q30 48 38 62 V90 Z"
-        fill="#ffcf75"
+        fill="#d9f2cc"
       />
-      <path d="M30 52 V90 M22 72 H38" stroke="#6b4a14" strokeWidth="0.8" />
-      <rect x="15" y="96" width="30" height="6" rx="1.5" fill="#c9a24b" />
-      <path d="M22 102 H38 L34 111 H26 Z" fill="#c9a24b" />
-      <line x1="30" y1="111" x2="30" y2="122" stroke="#c9a24b" strokeWidth="1.2" />
-      <circle cx="30" cy="125" r="2.6" fill="#c9a24b" />
+      <path d="M30 52 V90 M22 72 H38" stroke="#3f6b50" strokeWidth="0.8" />
+      <rect x="15" y="96" width="30" height="6" rx="1.5" fill="#5f8c69" />
+      <path d="M22 102 H38 L34 111 H26 Z" fill="#5f8c69" />
+      <line x1="30" y1="111" x2="30" y2="122" stroke="#5f8c69" strokeWidth="1.2" />
+      <circle cx="30" cy="125" r="2.6" fill="#5f8c69" />
     </svg>
     </div>
   );
@@ -70,7 +70,7 @@ export function Mandala({ className = "" }: { className?: string }) {
       aria-hidden="true"
       focusable="false"
     >
-      <g fill="none" stroke="#c9a24b" strokeWidth="1">
+      <g fill="none" stroke="#5f8c69" strokeWidth="1">
         <circle cx="300" cy="300" r="296" />
         <circle cx="300" cy="300" r="286" strokeOpacity="0.5" />
         {ticks.map((a) => (
@@ -121,14 +121,14 @@ export function WaxSeal({
     >
       <defs>
         <radialGradient id="waxBody" cx="0.35" cy="0.3" r="0.95">
-          <stop offset="0" stopColor="#d9955a" />
-          <stop offset="0.5" stopColor="#92481f" />
-          <stop offset="1" stopColor="#3a1a0c" />
+          <stop offset="0" stopColor="#c8e6bc" />
+          <stop offset="0.5" stopColor="#7fae86" />
+          <stop offset="1" stopColor="#3f6b50" />
         </radialGradient>
         <linearGradient id="waxGold" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f3dfa6" />
-          <stop offset="0.5" stopColor="#c9a24b" />
-          <stop offset="1" stopColor="#8a6420" />
+          <stop offset="0" stopColor="#fbfff8" />
+          <stop offset="0.5" stopColor="#d4ecca" />
+          <stop offset="1" stopColor="#9fcba8" />
         </linearGradient>
       </defs>
       <path d={WAX_PATH} fill="url(#waxBody)" />
@@ -138,7 +138,7 @@ export function WaxSeal({
         <rect x="56" y="56" width="88" height="88" />
         <rect x="56" y="56" width="88" height="88" transform="rotate(45 100 100)" />
       </g>
-      <circle cx="100" cy="100" r="36" fill="#3a1a0c" stroke="url(#waxGold)" strokeWidth="1.4" />
+      <circle cx="100" cy="100" r="36" fill="#3f6b50" stroke="url(#waxGold)" strokeWidth="1.4" />
       <text
         x="100"
         y="109"
@@ -149,6 +149,37 @@ export function WaxSeal({
       >
         {initials}
       </text>
+    </svg>
+  );
+}
+
+/** Heart flanked by leafy sprigs; used between the two families. */
+export function LoveMotif({ className = "" }: { className?: string }) {
+  const sprig = (
+    <g fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+      <path d="M42 20 H10" />
+      <path d="M33 20 C31 13 25 12 21 13.5 C22.5 19 27.5 21 33 20 Z" fill="currentColor" fillOpacity="0.18" />
+      <path d="M25 20 C23 27 17 28 13 26.5 C14.5 21 19.5 19 25 20 Z" fill="currentColor" fillOpacity="0.18" />
+      <circle cx="8" cy="20" r="1.6" fill="currentColor" stroke="none" />
+    </g>
+  );
+  return (
+    <svg
+      className={`love-motif ${className}`}
+      viewBox="0 0 120 40"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {sprig}
+      <g transform="translate(120 0) scale(-1 1)">{sprig}</g>
+      <path
+        d="M60 33 C45 22 43 15 43 12.5 C43 8.5 46.5 6 50.5 6 C54 6 58 8 60 12 C62 8 66 6 69.5 6 C73.5 6 77 8.5 77 12.5 C77 15 75 22 60 33 Z"
+        fill="currentColor"
+        fillOpacity="0.2"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

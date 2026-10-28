@@ -16,7 +16,7 @@ import GuestName from "./GuestName";
 import Reveal from "./Reveal";
 import ShareButton from "./ShareButton";
 import Spotlight from "./Spotlight";
-import { Crescent, Divider, Frieze, Lantern, Mandala, Sparkles } from "./ornaments";
+import { Crescent, Divider, Frieze, Lantern, LoveMotif, Mandala, Sparkles } from "./ornaments";
 
 function EventCard({ event, solo }: { event: EventInfo; solo: boolean }) {
   return (
@@ -120,20 +120,15 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
           >
             <defs>
               <linearGradient id="capFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#5a3720" />
-                <stop offset="1" stopColor="#3f2415" />
+                <stop offset="0" stopColor="#fcfffa" />
+                <stop offset="1" stopColor="#f7fcf4" />
               </linearGradient>
               <linearGradient id="capStroke" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#f3dfa6" />
-                <stop offset="1" stopColor="#c9a24b" />
+                <stop offset="0" stopColor="#a9d0a0" />
+                <stop offset="1" stopColor="#5f8c69" />
               </linearGradient>
-              <radialGradient id="capGlow" cx="0.5" cy="0.85" r="0.65">
-                <stop offset="0" stopColor="#f3dfa6" stopOpacity="0.22" />
-                <stop offset="1" stopColor="#f3dfa6" stopOpacity="0" />
-              </radialGradient>
             </defs>
             <path d="M0 46 V30 C0 12 36 9 50 0.8 C64 9 100 12 100 30 V46 Z" fill="url(#capFill)" />
-            <path d="M0 46 V30 C0 12 36 9 50 0.8 C64 9 100 12 100 30 V46 Z" fill="url(#capGlow)" />
             <path
               d="M0 46 V30 C0 12 36 9 50 0.8 C64 9 100 12 100 30 V46"
               fill="none"
@@ -145,7 +140,7 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
             <path
               d="M3 46 V31 C3 15 38 12 50 4.5 C62 12 97 15 97 31 V46"
               fill="none"
-              stroke="#c9a24b"
+              stroke="#5f8c69"
               strokeOpacity="0.6"
               strokeWidth="1"
               vectorEffect="non-scaling-stroke"
@@ -227,7 +222,7 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
             <p className="family-parents">{GROOM.parents}</p>
           </div>
           <div className="family-and" aria-hidden="true">
-            <Crescent className="crescent crescent-sm" />
+            <LoveMotif />
           </div>
           <div className="family">
             <p className="eyebrow">The Bride</p>
