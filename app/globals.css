@@ -1077,12 +1077,25 @@ html[data-opened] .stg {
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 2rem 1rem 3rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 1rem 1.25rem 3.5rem;
+  text-align: center;
+}
+.footer-divider {
+  margin-bottom: 0.6rem;
+}
+.footer-names {
+  font-family: var(--font-script), cursive;
+  font-size: clamp(2rem, 8vw, 2.6rem);
+  line-height: 1.2;
+  padding: 0 0.2em 0.1em;
+}
+.footer-date {
   font-family: var(--font-display), serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--gold);
 }

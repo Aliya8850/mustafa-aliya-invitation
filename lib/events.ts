@@ -46,7 +46,7 @@ export const HOSTS = "Mr. Umar Haroon Shaikh & Mrs. Umera Shaikh";
 export const RSVP_WHATSAPP = "";
 
 export const EVENTS: Record<EventId, EventInfo> = {
-  // TODO: the printed invitation has no Haldi details — confirm date, time and venue.
+  // TODO: confirm the Haldi date (time and venue are confirmed).
   haldi: {
     id: "haldi",
     title: "Haldi",
@@ -56,13 +56,16 @@ export const EVENTS: Record<EventId, EventInfo> = {
     day: "30",
     month: "November",
     year: "2026",
-    time: "04:00 pm onwards",
-    startISO: "2026-11-30T16:00:00+05:30",
-    calStart: "20261130T160000",
-    calEnd: "20261130T190000",
-    venue: ["Venue details will be shared shortly"],
-    mapQuery: "",
-    note: "Dress in yellow & marigold — come ready to be showered with turmeric and blessings.",
+    time: "07:00 pm onwards",
+    startISO: "2026-11-30T19:00:00+05:30",
+    calStart: "20261130T190000",
+    calEnd: "20261130T230000",
+    venue: [
+      "Kannad Hall, 2-C-2, Sector-9A,",
+      "Near Vashi Bus Depot., Vashi,",
+      "Navi Mumbai.",
+    ],
+    mapQuery: "Kannad Hall, 2-C-2, Sector 9A, Near Vashi Bus Depot, Vashi, Navi Mumbai",
     accent: "haldi",
   },
   nikah: {

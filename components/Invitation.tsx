@@ -303,8 +303,9 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
       </section>
 
       <footer className="footer">
-        <span className="foil">Mustafa &amp; Aliya</span>
-        <span>· December 2026 ·</span>
+        <Divider className="footer-divider" />
+        <span className="footer-names foil">Mustafa &amp; Aliya</span>
+        <span className="footer-date">December 2026</span>
       </footer>
     </main>
   );
