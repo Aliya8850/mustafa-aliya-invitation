@@ -218,7 +218,7 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
           </p>
           <Divider className="verse-divider" />
           <p className="verse-en">
-            “And among His signs is that He created for you mates from among yourselves, that you
+            “And among His signs is that He created for you spouses from among yourselves, that you
             may find tranquillity in them; and He placed between you affection and mercy.”
           </p>
           <p className="verse-ref">Surah Ar-Rum · 30:21</p>
