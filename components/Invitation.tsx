@@ -15,7 +15,6 @@ import Gate from "./Gate";
 import GuestName from "./GuestName";
 import Music from "./Music";
 import Reveal from "./Reveal";
-import ScrollProgress from "./ScrollProgress";
 import Spotlight from "./Spotlight";
 import Tilt from "./Tilt";
 import { Divider, FloatingHearts, Frieze, Lantern, LoveMotif, Mandala, Sparkles } from "./ornaments";
@@ -103,7 +102,6 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
 
   return (
     <main className="invite">
-      <ScrollProgress />
       <Gate initials="M·A" />
       <Music />
       <ClickBurst />

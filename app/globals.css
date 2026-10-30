@@ -1680,22 +1680,7 @@ body {
   }
 }
 
-/* ═════════════ Scroll progress line + touch-device smoothness ═════════════ */
-.progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  z-index: 90;
-  background: var(--foil);
-  transform-origin: left center;
-  transform: scaleX(0);
-  will-change: transform;
-  backface-visibility: hidden;
-  pointer-events: none;
-}
-
+/* ═════════════ Touch-device smoothness ═════════════ */
 /* Phones and tablets: drop the continuous full-screen animations and the
    heaviest shadows so scrolling stays at a steady 60fps. */
 @media (hover: none) {
