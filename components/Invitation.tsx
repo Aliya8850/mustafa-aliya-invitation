@@ -2,7 +2,6 @@ import {
   BRIDE,
   EVENTS,
   GROOM,
-  HOSTS,
   RSVP_WHATSAPP,
   VARIANTS,
   calendarUrl,
@@ -10,17 +9,28 @@ import {
   type EventInfo,
   type VariantKey,
 } from "@/lib/events";
+import ClickBurst from "./ClickBurst";
 import Countdown from "./Countdown";
 import Gate from "./Gate";
 import GuestName from "./GuestName";
+import Music from "./Music";
 import Reveal from "./Reveal";
-import ShareButton from "./ShareButton";
 import Spotlight from "./Spotlight";
-import { Crescent, Divider, Frieze, Lantern, LoveMotif, Mandala, Sparkles } from "./ornaments";
+import Tilt from "./Tilt";
+import { Divider, FloatingHearts, Frieze, Lantern, LoveMotif, Mandala, Sparkles } from "./ornaments";
 
-function EventCard({ event, solo }: { event: EventInfo; solo: boolean }) {
+function EventCard({
+  event,
+  solo,
+  index,
+}: {
+  event: EventInfo;
+  solo: boolean;
+  index: number;
+}) {
   return (
-    <Reveal className="event-wrap">
+    <Reveal className="event-wrap" from={solo ? "up" : index % 2 === 0 ? "left" : "right"}>
+      <Tilt className="event-tilt" max={5}>
       <article className={`event accent-${event.accent} ${solo ? "event-solo" : ""}`}>
         <div className="medallion">
           <span className="m-week">{event.weekday}</span>
@@ -32,12 +42,12 @@ function EventCard({ event, solo }: { event: EventInfo; solo: boolean }) {
 
         <p className="event-kicker">{event.kicker}</p>
         <h3 className="event-title">{event.title}</h3>
-        {event.arabic ? <p className="arabic event-arabic">{event.arabic}</p> : null}
 
         <Divider className="event-divider" />
 
         <p className="event-label">Time</p>
         <p className="event-time">{event.time}</p>
+        {event.timeExtra ? <p className="event-time-extra">{event.timeExtra}</p> : null}
 
         <p className="event-label">Venue</p>
         <address className="event-venue">
@@ -69,6 +79,7 @@ function EventCard({ event, solo }: { event: EventInfo; solo: boolean }) {
           </a>
         </div>
       </article>
+      </Tilt>
     </Reveal>
   );
 }
@@ -93,13 +104,17 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
     <main className="invite">
       <div className="progress" aria-hidden="true" />
       <Gate initials="M·A" />
+      <Music />
+      <ClickBurst />
       <Spotlight />
       <Sparkles />
 
       {/* ───────────── Hero ───────────── */}
       <section className="hero">
-        <Mandala className="mandala-a" />
-        <Mandala className="mandala-b" />
+        <div className="hero-bg" aria-hidden="true">
+          <Mandala className="mandala-a" />
+          <Mandala className="mandala-b" />
+        </div>
 
         <div className="hero-lanterns" aria-hidden="true">
           <Lantern className="hl hl-1" />
@@ -110,6 +125,7 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
 
         <GuestName />
 
+        <Tilt className="arch-tilt" max={6}>
         <div className="arch hero-anim" style={{ animationDelay: "1s" }}>
           <svg
             className="arch-cap"
@@ -182,12 +198,9 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
             <p className="hero-date stg" style={{ "--i": 5 } as React.CSSProperties}>
               {dateLine}
             </p>
-            <Divider className="hero-divider stg" />
-            <p className="hero-sub stg" style={{ "--i": 6 } as React.CSSProperties}>
-              {v.intro}
-            </p>
           </div>
         </div>
+        </Tilt>
 
         <a className="scroll-cue hero-anim" style={{ animationDelay: "2.2s" }} href="#verse">
           <span>Scroll</span>
@@ -215,21 +228,21 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
 
       {/* ───────────── Families ───────────── */}
       <section className="section families">
-        <Reveal className="families-grid">
-          <div className="family">
+        <div className="families-grid">
+          <Reveal from="left" className="family">
             <p className="eyebrow">The Groom</p>
             <p className="family-name foil">{GROOM.full}</p>
             <p className="family-parents">{GROOM.parents}</p>
-          </div>
-          <div className="family-and" aria-hidden="true">
+          </Reveal>
+          <Reveal from="zoom" className="family-and" delay={150}>
             <LoveMotif />
-          </div>
-          <div className="family">
+          </Reveal>
+          <Reveal from="right" className="family" delay={300}>
             <p className="eyebrow">The Bride</p>
             <p className="family-name foil">{BRIDE.full}</p>
             <p className="family-parents">{BRIDE.parents}</p>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
 
       <Frieze />
@@ -257,8 +270,8 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
         </Reveal>
 
         <div className="timeline">
-          {events.map((e) => (
-            <EventCard key={e.id} event={e} solo={solo} />
+          {events.map((e, i) => (
+            <EventCard key={e.id} event={e} solo={solo} index={i} />
           ))}
         </div>
       </section>
@@ -266,7 +279,7 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
       {/* ───────────── Countdown ───────────── */}
       <section className="section countdown-section">
         <Reveal>
-          <Countdown targetISO={first.startISO} label={first.title} />
+          <Countdown targetISO={first.startISO} label={first.short} />
         </Reveal>
       </section>
 
@@ -274,26 +287,24 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
 
       {/* ───────────── Closing ───────────── */}
       <section className="section closing">
+        <FloatingHearts />
         <Reveal>
-          <Crescent className="crescent" />
           <p className="closing-line foil">
             Your Gracious Presence &amp; Heartfelt Blessings
             <br />
             Would Make This Occasion Truly Special
           </p>
           <Divider className="section-divider" />
-          <p className="eyebrow">With love &amp; duas</p>
-          <p className="hosts">{HOSTS}</p>
-          <p className="hosts-sub">and the Shaikh &amp; Khan families</p>
+          <p className="eyebrow">With best compliments from</p>
+          <p className="hosts">Shaikh Family, Relatives &amp; Friends</p>
 
-          <div className="closing-actions">
-            {rsvpHref ? (
+          {rsvpHref ? (
+            <div className="closing-actions">
               <a className="btn btn-gold" href={rsvpHref} target="_blank" rel="noopener noreferrer">
                 RSVP on WhatsApp
               </a>
-            ) : null}
-            <ShareButton />
-          </div>
+            </div>
+          ) : null}
         </Reveal>
       </section>
 

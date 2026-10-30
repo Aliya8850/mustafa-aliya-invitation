@@ -66,6 +66,7 @@ body {
 }
 .calli {
   font-family: var(--font-calli), var(--font-arabic), serif;
+  font-weight: 700;
   direction: rtl;
 }
 
@@ -475,7 +476,6 @@ html:not([data-opened]) .hero-anim {
   align-items: center;
   width: clamp(46px, 6.5vw, 78px);
   transform-origin: top center;
-  animation: swing 6s ease-in-out infinite;
 }
 .lantern-wrap::before {
   content: "";
@@ -488,10 +488,10 @@ html:not([data-opened]) .hero-anim {
   height: auto;
   filter: drop-shadow(0 6px 10px rgba(60, 100, 75, 0.25));
 }
-.hl-1 { left: 3%; --drop: 30px; animation-delay: 0s; }
-.hl-2 { left: 13%; --drop: 140px; animation-delay: -1.6s; }
-.hl-3 { right: 13%; --drop: 140px; animation-delay: -3s; }
-.hl-4 { right: 3%; --drop: 30px; animation-delay: -4.2s; }
+.hl-1 { left: 3%; --drop: 30px; --sd: 0s; --ed: 2.2s; }
+.hl-2 { left: 13%; --drop: 140px; --sd: -1.6s; --ed: 1.4s; }
+.hl-3 { right: 13%; --drop: 140px; --sd: -3s; --ed: 1.4s; }
+.hl-4 { right: 3%; --drop: 30px; --sd: -4.2s; --ed: 2.2s; }
 @media (max-width: 720px) {
   .hl-2,
   .hl-3 {
@@ -966,11 +966,6 @@ html[data-opened] .stg {
   margin: 0;
   color: var(--accent);
 }
-.event-arabic {
-  margin: 0.2rem 0 0;
-  font-size: 1.6rem;
-  color: var(--gold-lo);
-}
 .event .divider {
   color: var(--gold-lo);
 }
@@ -986,6 +981,12 @@ html[data-opened] .stg {
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0;
+}
+.event-time-extra {
+  margin: 0.1rem 0 0;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--cream);
 }
 .event-venue {
   font-style: normal;
@@ -1074,11 +1075,6 @@ html[data-opened] .stg {
   font-size: clamp(0.95rem, 3.2vw, 1.2rem);
   letter-spacing: 0.08em;
   margin: 0;
-}
-.hosts-sub {
-  margin: 0.2rem 0 0;
-  font-style: italic;
-  color: var(--cream);
 }
 .closing-actions {
   display: flex;
@@ -1271,4 +1267,436 @@ html[data-opened] .stg {
 /* Headroom is added above, so pull the surname back up to keep spacing tidy. */
 .name-first {
   margin-bottom: -0.3em;
+}
+
+/* ───────────── Closing section spacing ───────────── */
+.closing {
+  padding-block: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 2.5rem);
+}
+.closing-line {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: clamp(1.9rem, 6vw, 2.7rem);
+  line-height: 1.5;
+  word-spacing: 0.18em;
+  text-wrap: balance;
+}
+.closing .divider {
+  margin-block: 1.6rem 1.8rem;
+}
+.closing .eyebrow {
+  margin-bottom: 0.7rem;
+  color: var(--gold-hi);
+}
+.hosts {
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.footer {
+  padding-top: 0;
+}
+.footer-divider {
+  margin-block: 0.4rem 0.8rem;
+}
+
+/* ───────────── Music button ───────────── */
+.music-btn {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  color: var(--gold-hi);
+  background: rgba(249, 253, 246, 0.9);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 8px 22px rgba(60, 100, 75, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.music-btn:hover {
+  transform: scale(1.08);
+  background: #fff;
+}
+.music-btn:focus-visible {
+  outline: 2px solid var(--gold-hi);
+  outline-offset: 3px;
+}
+.music-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ───────────── Hero background fade ─────────────
+   The mandala and glow are larger than the hero; fade them out at the top and
+   bottom edges instead of letting them be cut off in a hard line. */
+.hero > .hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(to bottom, transparent 0, #000 16%, #000 80%, transparent 100%);
+  mask: linear-gradient(to bottom, transparent 0, #000 16%, #000 80%, transparent 100%);
+}
+.hero::before {
+  -webkit-mask: linear-gradient(to bottom, transparent 0, #000 16%, #000 78%, transparent 100%);
+  mask: linear-gradient(to bottom, transparent 0, #000 16%, #000 78%, transparent 100%);
+}
+
+/* ───────────── Lanterns drop in after the gate opens ─────────────
+   The drop uses the individual `translate` property so it composes with the
+   `transform: rotate()` used by the swing. */
+html:not([data-opened]) .lantern-wrap {
+  opacity: 0;
+  translate: 0 -130%;
+}
+html[data-opened] .lantern-wrap {
+  animation:
+    swing 6s ease-in-out var(--sd, 0s) infinite,
+    lantern-drop 2.2s cubic-bezier(0.22, 1.15, 0.36, 1) var(--ed, 1.3s) both;
+}
+@keyframes lantern-drop {
+  from { opacity: 0; translate: 0 -130%; }
+  12% { opacity: 1; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-opened] .lantern-wrap {
+    animation: none;
+  }
+}
+
+/* ═════════════ Extra motion & interaction ═════════════ */
+
+/* Directional reveals (compose with the base .reveal-armed fade) */
+.reveal-armed.from-left:not(.is-in) {
+  transform: translateX(-70px);
+}
+.reveal-armed.from-right:not(.is-in) {
+  transform: translateX(70px);
+}
+.reveal-armed.from-zoom:not(.is-in) {
+  transform: scale(0.6);
+}
+
+/* 3D tilt towards the pointer */
+.tilt {
+  transform: perspective(1100px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.45s ease-out;
+}
+.tilt[data-tilting] {
+  transition: transform 0.08s linear;
+}
+.arch-tilt {
+  width: min(100%, 700px);
+}
+.event-tilt {
+  position: relative;
+  border-radius: 6px;
+}
+.event-tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 255, 255, 0.7),
+    transparent 55%
+  );
+  mix-blend-mode: soft-light;
+}
+.event-tilt[data-tilting]::after {
+  opacity: 1;
+}
+
+/* Names are "written" onto the arch, left to right, once the gate opens */
+.name-first {
+  -webkit-mask-image: linear-gradient(90deg, #000 0 40%, transparent 60% 100%);
+  mask-image: linear-gradient(90deg, #000 0 40%, transparent 60% 100%);
+  -webkit-mask-size: 250% 100%;
+  mask-size: 250% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+}
+html[data-opened] .name-block .name-first {
+  animation:
+    write-on 1.9s cubic-bezier(0.5, 0, 0.2, 1) calc(1.9s + var(--i, 0) * 0.16s) both,
+    foil 7s ease-in-out infinite alternate;
+}
+@keyframes write-on {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+
+/* Buttons: light sweep on hover */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.btn:hover::after {
+  transform: translateX(120%);
+}
+
+/* Countdown digits tick, and the boxes pop in one by one */
+.count-num {
+  display: inline-block;
+  animation: tick 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+@keyframes tick {
+  from { transform: translateY(-0.22em) scale(0.92); opacity: 0.35; }
+  to { transform: none; opacity: 1; }
+}
+.count-cell {
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.count-cell:nth-child(2) { transition-delay: 0.1s; }
+.count-cell:nth-child(3) { transition-delay: 0.2s; }
+.count-cell:nth-child(4) { transition-delay: 0.3s; }
+.reveal-armed:not(.is-in) .count-cell {
+  opacity: 0;
+  transform: translateY(26px) scale(0.9);
+}
+
+/* Dividers grow out from the centre; headings open up; journey draws itself */
+.divider {
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s, opacity 0.8s ease 0.3s;
+}
+.reveal-armed:not(.is-in) .divider {
+  transform: scaleX(0);
+  opacity: 0;
+}
+.section-title {
+  transition: letter-spacing 1.4s ease 0.1s, opacity 0.9s ease;
+}
+.reveal-armed:not(.is-in) .section-title {
+  letter-spacing: 0.3em;
+  opacity: 0;
+}
+.journey::before {
+  transform-origin: left;
+  transition: transform 1.6s ease 0.5s;
+}
+.reveal-armed:not(.is-in) .journey::before {
+  transform: scaleX(0);
+}
+.journey-item {
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.journey-item:nth-child(1) { transition-delay: 0.3s; }
+.journey-item:nth-child(2) { transition-delay: 0.7s; }
+.journey-item:nth-child(3) { transition-delay: 1.1s; }
+.reveal-armed:not(.is-in) .journey-item {
+  opacity: 0;
+  transform: translateY(18px);
+}
+.journey-dot {
+  animation: dot-pulse 2.6s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--espresso), 0 0 8px rgba(95, 140, 105, 0.35); }
+  50% { box-shadow: 0 0 0 4px var(--espresso), 0 0 22px rgba(95, 140, 105, 0.85); }
+}
+
+/* Event medallion pops in and its dashed ring slowly turns */
+.medallion {
+  transition: scale 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) 0.25s, opacity 0.6s ease 0.25s;
+}
+.reveal-armed:not(.is-in) .medallion {
+  scale: 0.5;
+  opacity: 0;
+}
+.medallion::after {
+  animation: spin 26s linear infinite;
+}
+
+/* The heart between the families beats */
+.love-motif > path {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: beat 1.9s ease-in-out infinite;
+}
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.2); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.12); }
+  70% { transform: scale(1); }
+}
+
+/* Floating hearts behind the closing text */
+.hearts {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hearts svg {
+  position: absolute;
+  bottom: -30px;
+  height: auto;
+  color: #9fcba8;
+  opacity: 0;
+  animation: heart-float linear infinite;
+}
+@keyframes heart-float {
+  0% { transform: translateY(0) scale(0.8) rotate(-8deg); opacity: 0; }
+  15% { opacity: 0.75; }
+  100% { transform: translateY(-520px) scale(1.15) rotate(10deg); opacity: 0; }
+}
+
+/* Tap-anywhere sparkle burst */
+.burst-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+  overflow: hidden;
+}
+.burst {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, #8fc19a 60%, #5f8c69);
+  animation: burst 0.9s cubic-bezier(0.1, 0.7, 0.3, 1) forwards;
+}
+.burst-diamond {
+  border-radius: 1px;
+  rotate: 45deg;
+  background: #a9d0a0;
+}
+@keyframes burst {
+  0% { transform: translate(0, 0) scale(var(--s, 1)); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* Gate: the seal sends out rings that say "tap me" */
+.wax {
+  position: relative;
+}
+.wax::before,
+.wax::after {
+  content: "";
+  position: absolute;
+  inset: 2%;
+  border-radius: 50%;
+  border: 2px solid rgba(95, 140, 105, 0.55);
+  pointer-events: none;
+  animation: ring 2.8s ease-out infinite;
+}
+.wax::after {
+  animation-delay: 1.4s;
+}
+@keyframes ring {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.gate.is-opening .wax::before,
+.gate.is-opening .wax::after {
+  animation: none;
+  opacity: 0;
+}
+
+/* Scroll-linked parallax (browsers with scroll timelines; harmless elsewhere) */
+@supports (animation-timeline: scroll()) {
+  .hero > .hero-bg {
+    animation: hero-parallax linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+  }
+  .hero > .hero-lanterns {
+    animation: lantern-parallax linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+  }
+}
+@keyframes hero-parallax {
+  to { transform: translateY(120px) scale(1.08); }
+}
+@keyframes lantern-parallax {
+  to { transform: translateY(-90px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none !important;
+  }
+  .love-motif > path,
+  .journey-dot,
+  .medallion::after,
+  .hearts svg,
+  .wax::before,
+  .wax::after,
+  .count-num,
+  .hero > .hero-bg,
+  .hero > .hero-lanterns {
+    animation: none !important;
+  }
+  html[data-opened] .name-block .name-first {
+    animation: none;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+/* ═════════════ No sideways overflow (keeps phones at true width) ═════════════
+   Slide-in reveals, the big mandala and the lanterns all sit partly off-screen
+   before they animate. Phones count that as extra page width and zoom out, so
+   clip it at every level. (`clip` falls back to `hidden` in older browsers.) */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+}
+.invite,
+.section,
+.hero,
+.hub,
+.footer {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-bottom: 5rem;
+  }
+}
+
+/* Side movement stays on every screen size; phones just slide a shorter way.
+   The cards slide inside these parents, which clip sideways overflow, so no
+   horizontal scrollbar or blank strip can appear. */
+.timeline,
+.families-grid {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+@media (max-width: 900px) {
+  .reveal-armed.from-left:not(.is-in) {
+    transform: translateX(-40px);
+  }
+  .reveal-armed.from-right:not(.is-in) {
+    transform: translateX(40px);
+  }
 }

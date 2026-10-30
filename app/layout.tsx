@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import {
   Amiri,
-  Aref_Ruqaa,
   Cinzel,
   Great_Vibes,
   Lora,
+  Scheherazade_New,
 } from "next/font/google";
 import "./globals.css";
 
@@ -27,7 +27,7 @@ const arabic = Amiri({
   weight: ["400", "700"],
 });
 
-const calligraphy = Aref_Ruqaa({
+const calligraphy = Scheherazade_New({
   variable: "--font-calli",
   subsets: ["arabic", "latin"],
   weight: ["400", "700"],

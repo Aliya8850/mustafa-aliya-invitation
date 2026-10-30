@@ -229,3 +229,35 @@ export function Sparkles() {
     </div>
   );
 }
+
+const HEARTS = Array.from({ length: 9 }, (_, i) => ({
+  left: 6 + ((i * 11) % 88),
+  size: 12 + ((i * 7) % 14),
+  delay: -((i * 2.3) % 14),
+  duration: 9 + ((i * 5) % 7),
+}));
+
+/** Soft hearts drifting upwards behind the closing section. */
+export function FloatingHearts() {
+  return (
+    <div className="hearts" aria-hidden="true">
+      {HEARTS.map((h, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 24 22"
+          style={{
+            left: `${h.left}%`,
+            width: h.size,
+            animationDelay: `${h.delay}s`,
+            animationDuration: `${h.duration}s`,
+          }}
+        >
+          <path
+            d="M12 21 C3 14 1 9 1 6.5 C1 3.5 3.5 1.5 6.5 1.5 C9 1.5 11 3 12 5 C13 3 15 1.5 17.5 1.5 C20.5 1.5 23 3.5 23 6.5 C23 9 21 14 12 21 Z"
+            fill="currentColor"
+          />
+        </svg>
+      ))}
+    </div>
+  );
+}

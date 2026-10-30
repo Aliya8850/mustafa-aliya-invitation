@@ -2,15 +2,19 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-/** Fades children up as they scroll into view. Visible by default without JS. */
+export type RevealFrom = "up" | "left" | "right" | "zoom";
+
+/** Animates children in as they scroll into view. Visible by default without JS. */
 export default function Reveal({
   children,
   className = "",
   delay = 0,
+  from = "up",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  from?: RevealFrom;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -36,7 +40,7 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      className={`reveal ${className}`}
+      className={`reveal from-${from} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

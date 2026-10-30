@@ -4,13 +4,14 @@ export interface EventInfo {
   id: EventId;
   title: string;
   short: string;
-  arabic?: string;
   kicker: string;
   weekday: string;
   day: string;
   month: string;
   year: string;
   time: string;
+  /** Optional second line under the time, e.g. an exact clock time. */
+  timeExtra?: string;
   /** ISO timestamp (IST) used for the countdown. */
   startISO: string;
   /** Local wall-clock times for the Google Calendar link (ctz=Asia/Kolkata). */
@@ -36,8 +37,6 @@ export const BRIDE = {
   full: "Aliya Khan",
   parents: "D/o Late Mr. Salim Khan & Mrs. Zohra Bi Khan",
 };
-
-export const HOSTS = "Mr. Umar Haroon Shaikh & Mrs. Umera Shaikh";
 
 /**
  * Optional: WhatsApp number (country code, digits only, e.g. "919876543210")
@@ -72,16 +71,16 @@ export const EVENTS: Record<EventId, EventInfo> = {
     id: "nikah",
     title: "Nikah",
     short: "Nikah",
-    arabic: "عقد النكاح",
     kicker: "Inshallah",
     weekday: "Wednesday",
     day: "02",
     month: "December",
     year: "2026",
     time: "After Namaz-e-Maghrib",
-    startISO: "2026-12-02T18:00:00+05:30",
-    calStart: "20261202T180000",
-    calEnd: "20261202T210000",
+    timeExtra: "07:00 pm onwards",
+    startISO: "2026-12-02T19:00:00+05:30",
+    calStart: "20261202T190000",
+    calEnd: "20261202T220000",
     venue: [
       "Malhar Hall, B-103, Municipal Rd,",
       "Sector 2, Govandi East,",
@@ -94,7 +93,6 @@ export const EVENTS: Record<EventId, EventInfo> = {
     id: "walima",
     title: "Dawat-e-Walima",
     short: "Walima",
-    arabic: "وليمة",
     kicker: "The Reception",
     weekday: "Friday",
     day: "04",

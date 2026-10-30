@@ -18,6 +18,8 @@ export default function Gate({ initials }: { initials: string }) {
   function open() {
     if (phase !== "closed") return;
     document.documentElement.dataset.opened = "1";
+    // Dispatched synchronously inside the click so audio may start (autoplay rules).
+    window.dispatchEvent(new Event("invitation-open"));
     setPhase("opening");
     window.setTimeout(() => setPhase("gone"), 2400);
   }

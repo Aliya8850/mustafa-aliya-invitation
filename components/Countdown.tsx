@@ -48,11 +48,13 @@ export default function Countdown({
 
   return (
     <div>
-      <p className="eyebrow">Counting down to {label}</p>
+      <p className="eyebrow">Countdown to {label}</p>
       <div className="countdown" role="timer" aria-live="off">
         {parts.map(([unit, value]) => (
           <div className="count-cell" key={unit}>
-            <span className="count-num">{value}</span>
+            <span className="count-num" key={value}>
+              {value}
+            </span>
             <span className="count-unit">{unit}</span>
           </div>
         ))}
