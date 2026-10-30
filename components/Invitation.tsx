@@ -184,9 +184,8 @@ export default function Invitation({ variant }: { variant: VariantKey }) {
               <span
                 className="name-amp stg"
                 style={{ "--i": 3 } as React.CSSProperties}
-                aria-label="and"
               >
-                &amp;
+                with
               </span>
               <span className="name-block stg" style={{ "--i": 4 } as React.CSSProperties}>
                 <span className="name-first foil">{BRIDE.first}</span>

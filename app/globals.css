@@ -627,11 +627,10 @@ html:not([data-opened]) .hero-anim {
   align-items: center;
   gap: 1rem;
   margin: 0.9rem 0 0.7rem;
-  font-family: var(--font-body), serif;
-  font-style: italic;
-  font-size: clamp(2rem, 7vw, 2.8rem);
-  line-height: 1;
-  color: var(--gold);
+  font-family: var(--font-script), cursive;
+  font-size: clamp(1.9rem, 6.5vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--gold-hi);
 }
 .name-amp::before,
 .name-amp::after {
@@ -1468,11 +1467,13 @@ html[data-opened] .name-block .name-first {
   opacity: 0;
 }
 .journey::before {
-  transform-origin: left;
-  transition: transform 1.6s ease 0.5s;
+  /* Uncover left-to-right instead of scaling: scaling a dashed line stretches
+     the dashes and shimmers on mobile; a clip keeps them crisp. */
+  clip-path: inset(-2px 0 -2px 0);
+  transition: clip-path 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
 }
 .reveal-armed:not(.is-in) .journey::before {
-  transform: scaleX(0);
+  clip-path: inset(-2px 100% -2px 0);
 }
 .journey-item {
   transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.3, 1.4, 0.5, 1);
@@ -1485,11 +1486,21 @@ html[data-opened] .name-block .name-first {
   transform: translateY(18px);
 }
 .journey-dot {
-  animation: dot-pulse 2.6s ease-in-out infinite;
+  position: relative;
 }
-@keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 0 4px var(--espresso), 0 0 8px rgba(95, 140, 105, 0.35); }
-  50% { box-shadow: 0 0 0 4px var(--espresso), 0 0 22px rgba(95, 140, 105, 0.85); }
+/* Pulse as a ring that only scales + fades (compositor-friendly), rather than
+   animating box-shadow, which repaints every frame. */
+.journey-dot::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 1.5px solid rgba(95, 140, 105, 0.7);
+  opacity: 0;
+  animation: dot-ring 2.8s ease-out infinite;
+}
+@keyframes dot-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.1); opacity: 0; }
 }
 
 /* Event medallion pops in and its dashed ring slowly turns */
@@ -1621,7 +1632,7 @@ html[data-opened] .name-block .name-first {
     transform: none !important;
   }
   .love-motif > path,
-  .journey-dot,
+  .journey-dot::after,
   .medallion::after,
   .hearts svg,
   .wax::before,
