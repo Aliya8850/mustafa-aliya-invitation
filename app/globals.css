@@ -120,29 +120,6 @@ body {
 }
 
 /* ───────────── Scroll progress & spotlight ───────────── */
-.progress {
-  display: none;
-}
-@supports (animation-timeline: scroll()) {
-  .progress {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    z-index: 90;
-    background: var(--foil);
-    transform-origin: left;
-    transform: scaleX(0);
-    animation: grow linear both;
-    animation-timeline: scroll(root);
-  }
-}
-@keyframes grow {
-  to { transform: scaleX(1); }
-}
-
 .spotlight {
   position: fixed;
   inset: 0;
@@ -1618,6 +1595,7 @@ html[data-opened] .name-block .name-first {
 }
 
 /* Scroll-linked parallax (browsers with scroll timelines; harmless elsewhere) */
+@media (hover: hover) and (pointer: fine) {
 @supports (animation-timeline: scroll()) {
   .hero > .hero-bg {
     animation: hero-parallax linear both;
@@ -1629,6 +1607,7 @@ html[data-opened] .name-block .name-first {
     animation-timeline: scroll(root);
     animation-range: 0 100vh;
   }
+}
 }
 @keyframes hero-parallax {
   to { transform: translateY(120px) scale(1.08); }
@@ -1698,5 +1677,39 @@ body {
   }
   .reveal-armed.from-right:not(.is-in) {
     transform: translateX(40px);
+  }
+}
+
+/* ═════════════ Scroll progress line + touch-device smoothness ═════════════ */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 90;
+  background: var(--foil);
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+/* Phones and tablets: drop the continuous full-screen animations and the
+   heaviest shadows so scrolling stays at a steady 60fps. */
+@media (hover: none) {
+  .mandala-a,
+  .mandala-b {
+    animation: none;
+  }
+  .sparkles span:nth-child(even) {
+    display: none;
+  }
+  .arch {
+    filter: drop-shadow(0 18px 28px rgba(60, 100, 75, 0.25));
+  }
+  .lantern {
+    filter: none;
   }
 }
